@@ -7,7 +7,7 @@
     let value = '';
     let musics = [];
     let radiovalue = "1";
-    
+
     async function searchTrack() {
             if (value) {
             const res = await fetch(serverURL + 'music/filter/' + value + '/');
@@ -17,6 +17,12 @@
         }
  
     }
+
+    $: if (value) {
+        searchTrack()
+    }
+ 
+    $: filtredMusics = musics.sort((a, b) => ((radiovalue === '1' ? a.duration > b.duration : a.duration < b.duration) ? 1 : -1))
 
 
    
